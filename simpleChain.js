@@ -5,11 +5,12 @@
 const BlockChain = require('./BlockChain.js');
 const Block = require('./Block.js');
 
-let myBlockChain = new BlockChain.Blockchain();
+let myBlockChain = new BlockChain.Blockchain()
 
 setTimeout(function () {
 	console.log("Waiting...")
-}, 10000);
+}, 2000);
+
 
 /******************************************
  ** Function for Create Tests Blocks   ****
@@ -25,7 +26,7 @@ setTimeout(function () {
 			i++;
 			if (i < 10) theLoop(i);
 		});
-	}, 10000);
+	}, 2000);
 })(0);
 
 

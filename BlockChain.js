@@ -10,7 +10,11 @@ class Blockchain {
 
     constructor() {
         this.db = new LevelSandbox.LevelSandbox();
-        this.generateGenesisBlock();
+
+        this.genesisBlock = this.generateGenesisBlock()
+          .then((result) => {
+            console.log(JSON.parse(result));
+          });
     }
 
     // Helper method to create a Genesis Block (always with height= 0)
@@ -19,18 +23,17 @@ class Blockchain {
     // will not create the genesis block
     generateGenesisBlock(){
       let self = this;
-      const chainLength = self.getBlockchainHeight();
-      if (chainLength === 0) {
-        self.addBlock(new Block("First block in the chain - Genesis block"));
-      }
+      return self.getBlockchainHeight()
+        .then((count) => {
+          if (count === 0) {
+            return self.addBlock(new Block.Block('First block in the chain - Genesis block'));
+          }
+        })
     }
 
     // Get block height, it is a helper method that return the height of the blockchain
     getBlockchainHeight() {
       return this.db.getBlocksCount()
-        .then((count) => {
-          return count
-        })
     }
 
     // Add new block
