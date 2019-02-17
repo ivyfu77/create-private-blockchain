@@ -108,7 +108,31 @@ class Blockchain {
 
   // Validate Blockchain
   validateChain() {
-      // Add your code here
+    let self = this;
+    let errorLog = [];
+
+    return self.db.getAllBlocks()
+      .then((chain) => {
+        if (chain && chain.length > 0) {
+          // console.log(chain);
+          chain.map((block, index) => {
+            const recalculateBlock = {
+              ...block,
+              'hash': '',
+            };
+            if (block.hash !== SHA256(JSON.stringify(recalculateBlock)).toString()) {
+              errorLog.push(`Block#${index} hash check failed.`);
+            }
+            if (index > 0 && block.previousBlockHash !== chain[index - 1].hash) {
+              errorLog.push(`Block#${index} previousBlockHash check failed`);
+            }
+          })
+        }
+        return errorLog;
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   // Utility Method to Tamper a Block for Test Validation

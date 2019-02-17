@@ -45,6 +45,25 @@ class LevelSandbox {
     });
   }
 
+  // Get all blocks and return as a array
+  getAllBlocks() {
+    let self = this;
+    let chain = [];
+
+    return new Promise((resolve, reject) => {
+      self.db.createReadStream()
+      .on('data', (data) => {
+        chain.push(JSON.parse(data.value));
+      })
+      .on('error', (err) => {
+        reject(err);
+      })
+      .on('close', () => {
+        resolve(chain);
+      })
+    });
+  }
+
   // Method that return the height
   getBlocksCount() {
     let self = this;
