@@ -9,6 +9,9 @@
 # production
 /build
 
+# levelDB
+/chaindata
+
 # misc
 .DS_Store
 .env.local
