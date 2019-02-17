@@ -16,17 +16,17 @@ setTimeout(function () {
  ** Function for Create Tests Blocks   ****
  ******************************************/
 
-// (function theLoop (i) {
-// 	setTimeout(function () {
-// 		let blockTest = new Block.Block("Test Block - " + (i + 1));
-// 		// Be careful this only will work if your method 'addBlock' in the Blockchain.js file return a Promise
-// 		myBlockChain.addBlock(blockTest).then((result) => {
-// 			console.log(JSON.parse(result));
-// 			i++;
-// 			if (i < 2) theLoop(i);
-// 		});
-// 	}, 2000);
-// })(0);
+(function theLoop (i) {
+	setTimeout(function () {
+		let blockTest = new Block.Block("Test Block - " + (i + 1));
+		// Be careful this only will work if your method 'addBlock' in the Blockchain.js file return a Promise
+		myBlockChain.addBlock(blockTest).then((result) => {
+			console.log(JSON.parse(result));
+			i++;
+			if (i < 10) theLoop(i);
+		});
+	}, 2000);
+})(0);
 
 
 /***********************************************
@@ -120,19 +120,19 @@ setTimeout(function () {
 
 
 // Be careful this only will work if `validateChain` method in Blockchain.js file return a Promise
-setTimeout(() => {
-  myBlockChain.validateChain().then((errorLog) => {
-  	if(errorLog && errorLog.length > 0){
-  		console.log("The chain is not valid:");
-  		errorLog.forEach(error => {
-  			console.log(error);
-  		});
-  	} else {
-  		console.log("No errors found, The chain is Valid!");
-  	}
-  })
-  .catch((error) => {
-  	console.log(error);
-  })
-}, 2000)
+// setTimeout(() => {
+//   myBlockChain.validateChain().then((errorLog) => {
+//   	if(errorLog && errorLog.length > 0){
+//   		console.log("The chain is not valid:");
+//   		errorLog.forEach(error => {
+//   			console.log(error);
+//   		});
+//   	} else {
+//   		console.log("No errors found, The chain is Valid!");
+//   	}
+//   })
+//   .catch((error) => {
+//   	console.log(error);
+//   })
+// }, 2000)
 
