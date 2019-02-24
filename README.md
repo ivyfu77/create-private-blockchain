@@ -13,11 +13,19 @@ To setup the project for review do the following:
 
 #### GET endpoint:
 "localhost:8000/api/block/{height}"
-*_height_*: number, the height of the block you want to get.
+
+__height__: number, the height of the block you want to get.
 
 #### POST endpoint:
 "localhost:8000/api/block"
-*_payload: { 'body': 'the block body you want to add' }_*
 
+__payload__: 
+```JS
+{ 
+  'body': 'the block body you want to add' 
+}
+```
 
-
+### NOTE: 
+- Please test the endpoints in postman
+- Test POST endpoint must has the right payload follow the provided format above. Otherwise won't add any block to levelDB.
