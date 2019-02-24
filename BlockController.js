@@ -23,9 +23,9 @@ class BlockController {
   /**
    * Implement a GET Endpoint to retrieve a block by index, url: "/api/block/:index"
    */
-  async getBlockByIndex() {
+  getBlockByIndex() {
     let self = this;
-    await this.server.route({
+    this.server.route({
       method: 'GET',
       path: '/api/block/{index}',
       handler: (request, h) => {
@@ -51,7 +51,19 @@ class BlockController {
       method: 'POST',
       path: '/api/block',
       handler: (request, h) => {
-        return (h);
+        let body = request.payload ? request.payload.body : null;
+        if (!body) {
+          return { error: 'Request must has valid body payload'}
+        }
+        let newBlock = new Block.Block(body);
+        return self.blockchain.addBlock(newBlock)
+          .then((result) => {
+            return JSON.parse(result);
+          })
+          .catch((err) => {
+            console.log('Error: ', err);
+            return err;
+          })
       }
     });
   }
